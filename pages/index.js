@@ -231,7 +231,7 @@ const smartWill = () => {
         <title>Smart Will</title>
         <meta name="description" content="Crypto-asset management app" />
       </Head>
-      <nav className="navbar mt-4 mb-4">
+      <nav className="navbar pt-2 pb-2 is-dark">
         <div className="container">
           <div className="navbar-brand">
             <h1>Smart Will</h1>
@@ -239,7 +239,7 @@ const smartWill = () => {
           <div className="navbar-end">
             <button
               onClick={connectWalletHandler}
-              className="button is-primary"
+              className="button is-success mt-1 is-centered"
             >
               Connect Wallet
             </button>
@@ -247,7 +247,8 @@ const smartWill = () => {
         </div>
       </nav>
       <section>
-        <div className="container">
+        <div className="container mt-4">
+          <h2>Contract Details</h2>
           <table className="table is-hoverable ">
             <tbody>
               <tr>
@@ -278,8 +279,9 @@ const smartWill = () => {
           </table>
         </div>
       </section>
-      <section className="mt-5">
+      <section className="mt-4">
         <div className="container">
+          <h2 className="mb-2">Modify Contract</h2>
           <div className="columns">
             <div className="column is-two-sixths">
               <div className="field">
