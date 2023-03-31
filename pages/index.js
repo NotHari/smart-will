@@ -6,6 +6,7 @@ import "bulma/css/bulma.css";
 import styles from "../styles/smartWill.module.css";
 
 const smartWill = () => {
+  // State Variables
   const [error, setError] = useState("");
 
   const [balance, setBalance] = useState("");
@@ -14,13 +15,11 @@ const smartWill = () => {
   const [lastAccess, setLastAccess] = useState("");
   const [owner, setOwner] = useState("");
   const [willExpiry, setWillExpiry] = useState("");
+
   const [address, setAddress] = useState("");
   const [time, setTime] = useState("");
   const [difference, setDifference] = useState("");
   const [value, setValue] = useState("");
-
-  const [web, setWeb3] = useState(null);
-  const [account, setAccount] = useState("");
 
   useEffect(() => {
     getBenefeciary();
@@ -31,6 +30,7 @@ const smartWill = () => {
     getBalanceHandler();
   });
 
+  // Handlers to display the content in the page
   const getBalanceHandler = async () => {
     const balance = await smartwill.methods.getBalance().call();
     setBalance(balance / Math.pow(10, 18));
@@ -116,6 +116,7 @@ const smartWill = () => {
     }
   };
 
+  // Handlers to initiate transactions in the smart contract
   const updateBenefeciaryHandler = async () => {
     try {
       const accounts = await window.ethereum.request({
@@ -142,7 +143,6 @@ const smartWill = () => {
         method: "eth_requestAccounts",
       });
       const account = accounts[0];
-      setAccount(account);
       const date = new Date(time).getTime() / 1000;
       await smartwill.methods.setWillExpiry(date).send({
         from: account,
@@ -155,12 +155,13 @@ const smartWill = () => {
 
   const updateInactivityTimeHandler = async () => {
     try {
-      await window.ethereum.enable();
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
       const account = accounts[0];
-      setAccount(account);
+      window.ethereum.on("accountsChanged", function (accounts) {
+        console.log("acct is " + accounts[0]);
+      });
       await smartwill.methods.setInactivityTime(difference).send({
         from: account,
       });
@@ -177,7 +178,6 @@ const smartWill = () => {
         method: "eth_requestAccounts",
       });
       const account = accounts[0];
-      setAccount(account);
       await smartwill.methods.setLastAccess().send({
         from: account,
       });
@@ -194,7 +194,6 @@ const smartWill = () => {
         method: "eth_requestAccounts",
       });
       const account = accounts[0];
-      setAccount(account);
       await smartwill.methods.transferFunds(value).send({
         from: account,
       });
@@ -409,7 +408,7 @@ const smartWill = () => {
             </div>
             <div className="column is-2">
               <button
-                onClick={updateExpiryTimeHandler}
+                onClick={updateLastAccessHandler}
                 className="button is-warning mt-2 is-rounded"
               >
                 setLastAccess()
