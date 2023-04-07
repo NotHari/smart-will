@@ -8,3 +8,26 @@ One solution to this challenge is the adoption of smart contracts for managing c
 the event of severe illness or death.
 
 The potential benefits of smart contracts for cryptocurrency asset management are significant. They can potentially save beneficiaries time, money, and stress, while ensuring that digital assets are transferred according to an individual's wishes. Further exploration of smart contracts in this domain can offer opportunities for enhancing the efficiency and effectiveness of digital asset transfer.
+
+## Steps to Setup Project
+
+1. Clone the repository.
+```
+git clone REPOSITORY_URL
+```
+2. Install the dependencies
+```
+npm install 
+```
+3. Setup a ganache workspace.
+4. Deploy the smart contract and change the smart contract address in will.js.
+```
+const smartwill = new web3.eth.Contract(
+  abi,
+  "YOUR_ADDRESS_HERE"
+);
+```
+5. Start the project.
+```
+npm run
+```
